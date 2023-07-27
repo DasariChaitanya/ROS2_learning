@@ -1,0 +1,11 @@
+#start with the image you want to run 
+#Follow it with commands start with RUN keyword
+FROM osrf/ros:humble-desktop
+
+RUN apt-get update
+RUN apt-get install -y git
+
+RUN mkdir -p new_folder
+RUN git clone https://github.com/DasariChaitanya/ROS2_learning
+
+RUN echo "DONE!! First dockerfile successfully run!!"
