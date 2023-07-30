@@ -23,11 +23,15 @@ docker ps -a
 ```
 - Run another shell of existing container
 ```
-docker exec -it (container_id) bash
+docker exec -it (container_id/ name) bash
 ```
 - Running container with  GUI enabled in windows
 ```
 docker run --name <container_name> -e DISPLAY=host.docker.internal:0.0 -it <image_name>
+```
+- Stop a docker container
+```
+docker stop <container_name>
 ```
 - Remove a single container
 ```
@@ -37,4 +41,7 @@ docker rm <container_name>
 ```
 docker build -t <image_name> .
 ```
-Runs any docker file present in the current folder.
+The above command by default looks for the file named 'dockerfile'
+```
+docker build -f <dockerfile_name> -t <image_name> .
+```

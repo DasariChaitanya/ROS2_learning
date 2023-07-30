@@ -1,11 +1,28 @@
 #start with the image you want to run 
 #Follow it with commands start with RUN keyword
-FROM osrf/ros:humble-desktop
 
-RUN apt-get update
-RUN apt-get install -y git
+ARG ROS_DISTRO=humble
+FROM osrf/ros:${ROS_DISTRO}-desktop as base
+ENV ROS_DISTRO ${ROS_DISTRO}
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	git nano ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 
-RUN mkdir -p new_folder
-RUN git clone https://github.com/DasariChaitanya/ROS2_learning
+ENV RMW_IMPLEMENTATION = rmw_cyclonedds_cpp
+
+COPY docker/entrypoint.sh /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
+
+
+FROM base AS overlay
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	&& mkdir -p new_folder
+
+WORKDIR /new_folder
+COPY docker/README.md .
+# RUN git clone https://github.com/DasariChaitanya/ROS2_learning
 
 RUN echo "DONE!! First dockerfile successfully run!!"
+
+COPY docker/entrypoint.sh /entrypoint.sh
+ENTRYPOINT [ "/entrypoint.sh" ]
