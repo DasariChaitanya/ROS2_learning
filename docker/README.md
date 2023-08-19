@@ -9,6 +9,14 @@ docker pull <image-name>
 docker images -a 
 docker images list
 ```
+- Building image from a docker file
+```
+docker build -t <image_name> .
+```
+The above command by default looks for the file named 'dockerfile'
+```
+docker build -f <dockerfile_name> -t <image_name> .
+```
 - Docker container from an image
 ```
 docker run -it <image-name>
@@ -36,12 +44,4 @@ docker stop <container_name>
 - Remove a single container
 ```
 docker rm <container_name>
-```
-- Building image from a docker file
-```
-docker build -t <image_name> .
-```
-The above command by default looks for the file named 'dockerfile'
-```
-docker build -f <dockerfile_name> -t <image_name> .
 ```

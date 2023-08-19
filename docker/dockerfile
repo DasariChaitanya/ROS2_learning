@@ -5,9 +5,10 @@ ARG ROS_DISTRO=humble
 FROM osrf/ros:${ROS_DISTRO}-desktop as base
 ENV ROS_DISTRO ${ROS_DISTRO}
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	git nano ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
+	git nano ros-${ROS_DISTRO}-gazebo-ros-pkgs
+	# ros-${ROS_DISTRO}-rmw-cyclonedds-cpp
 
-ENV RMW_IMPLEMENTATION = rmw_cyclonedds_cpp
+# ENV RMW_IMPLEMENTATION = rmw_cyclonedds_cpp
 
 COPY docker/entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
